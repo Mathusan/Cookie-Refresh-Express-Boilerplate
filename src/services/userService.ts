@@ -1,8 +1,18 @@
 import  {findUser,createUser, findUserById, findUserByToken , saveRefreshToken, removeRefreshToken} from '../../database/repository/user.repository'
 import { generatePassword, generateRefreshToken, generateToken, validatePassword } from '../utils/index'
-import { IUserInputs } from '../../database/types/user.type'
 
-export const signUp = async (userInputs: IUserInputs) => {
+export interface RegisterInputs {
+    name:string,
+    email:string,
+    password:string
+  }
+  
+  export interface LoginInputs {    
+    email:string,
+    password:string
+  }
+
+export const signUp = async (userInputs: RegisterInputs) => {
     const { name,email, password} = userInputs
 
     try {
@@ -34,7 +44,7 @@ export const signUp = async (userInputs: IUserInputs) => {
     }
 }
 
-export const logIn = async (userInputs : IUserInputs) =>{
+export const logIn = async (userInputs : LoginInputs) =>{
 
     const {email,password} = userInputs
 
@@ -54,16 +64,12 @@ export const logIn = async (userInputs : IUserInputs) =>{
             }else {
                 throw new Error("Incorrect Password")
             }
-
-
-
         }else {
             throw new Error("User not found")
         }
     } catch (error:any) {
         throw new Error(error.message)
     }
-
 }
 
 export const logout =async (refreshToken : string) => {
@@ -79,8 +85,6 @@ export const userFind = async (refreshToken:string) => {
     } catch (error:any) {
         throw new Error(error.message)
     }
-
-
 }
 
 export const userFindByID = async (userID : string) => {
