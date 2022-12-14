@@ -21,7 +21,7 @@ export const  createUser  = async ({name,email,password} : IUserInputs) =>{
         }
     }
 
- export const  findUser =async ({email} : any)=>{
+ export const  findUser =async (email : any)=>{
         try {
             const existingUser = await userModel.findOne({email : email})
             return existingUser
@@ -30,7 +30,7 @@ export const  createUser  = async ({name,email,password} : IUserInputs) =>{
         }
     }
 
-export const findUserByToken = async ({refreshToken} : any)   =>{
+export const findUserByToken = async (refreshToken : any)   =>{
     try {
         const existingUser = await userModel.findOne({refreshToken:refreshToken})
         return existingUser

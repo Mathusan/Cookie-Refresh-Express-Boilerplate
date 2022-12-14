@@ -15,7 +15,7 @@ export const validatePassword = async (enteredPassword : any, savedPassword : an
 };
 
 export const generateToken = async (payload : any) => {
-        return await jwt.sign(payload,`${config.accessTokenKey}` , { expiresIn: '10s'} )
+        return await jwt.sign(payload,`${config.accessTokenKey}` , { expiresIn: '1d'} )
 }
 
 export const generateRefreshToken = async (payload : any) =>{

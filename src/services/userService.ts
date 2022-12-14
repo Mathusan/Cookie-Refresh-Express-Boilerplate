@@ -7,7 +7,7 @@ export const signUp = async (userInputs: IUserInputs) => {
 
     try {
         
-         const checkExistingUser = await findUser({email})
+         const checkExistingUser = await findUser(email)
          
 
         if(!checkExistingUser){ 
@@ -39,7 +39,7 @@ export const logIn = async (userInputs : IUserInputs) =>{
     const {email,password} = userInputs
 
     try {
-        const existingUser = await findUser({email})
+        const existingUser = await findUser(email)
 
         if (existingUser) {
             const  validatedPassword = await validatePassword(password, existingUser.password)
@@ -74,7 +74,7 @@ export const logout =async (refreshToken : string) => {
 
 export const userFind = async (refreshToken:string) => {
     try {
-        const user = await findUserByToken({refreshToken})
+        const user = await findUserByToken(refreshToken)
         return user
     } catch (error:any) {
         throw new Error(error.message)
